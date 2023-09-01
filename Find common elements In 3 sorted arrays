@@ -1,0 +1,53 @@
+class Solution
+{
+    public:    
+       vector <int> commonElements (int A[], int B[], int C[], int n1, int n2, int n3)
+        {
+            vector<int>ans;
+            int i=0;
+            int j=0;
+            int k=0;
+            
+            while(i<n1 && j<n2 && k<n3){
+                
+                while(i<n1-1 && A[i]==A[i+1]){
+                    i++;
+                }
+                while(j<n2-1 && B[j]==B[j+1]){
+                    j++;
+                }
+                while(k<n3-1 && C[k]== C[k+1]){
+                    k++;
+                }
+                
+                if(A[i]==B[j] && B[j]==C[k]){
+                    ans.push_back(A[i]);
+                    i++;
+                    j++;
+                    k++;
+                }
+                else if(A[i]==B[j] && B[j]!=C[k]){
+                    if(A[i] >C[k]){
+                        k++;
+                    }
+                    else{
+                        i++;
+                        j++;
+                    }
+                }
+                else{
+                    if(A[i]> B[j]){
+                        j++;
+                    }
+                    else{
+                        i++;
+                    }
+                }
+            }
+                
+                return ans;
+           
+            //code here.
+        }
+
+};
