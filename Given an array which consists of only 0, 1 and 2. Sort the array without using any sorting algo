@@ -1,0 +1,19 @@
+class Solution
+{
+    public:
+    void sort012(int a[], int n)
+    {
+         int z=0,o=0,t=0,i=0;
+    while(n--){
+        if(arr[i]==0) z++;
+        if(arr[i]==1) o++;
+        if(arr[i]==2) t++;
+        i++;
+    }
+    int j=0;
+    while(z--) arr[j++]=0;
+    while(o--) arr[j++]=1;
+    }
+    
+};
+ 
