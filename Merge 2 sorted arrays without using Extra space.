@@ -1,0 +1,25 @@
+void merge(long long a[], long long b[], int n, int m) 
+        { 
+            
+            long long left=n-1;
+            long long right=0;
+            
+            
+            while(left>=0 && right<m){
+                
+                if(a[left]>b[right]){
+                    swap(a[left],b[right]);
+                    left--;
+                    right++;
+                }
+                else{
+                    break;
+                }
+                
+                
+            }
+            
+            sort(a,a+n);
+            sort(b,b+m);
+   
+        } 
