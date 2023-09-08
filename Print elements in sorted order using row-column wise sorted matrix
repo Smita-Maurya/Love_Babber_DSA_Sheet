@@ -1,0 +1,24 @@
+class Solution {
+  public:
+  vector<vector<int>> sortedMatrix(int N, vector<vector<int>> Mat) {
+      
+        vector<int>check;
+        for(int i=0; i<N ; i++){
+            for(int j=0; j<N ; j++){
+                check.push_back(Mat[i][j]);
+            }
+        }
+        int k=0;
+        
+        sort(check.begin() , check.end());
+        for(int i=0; i<N ; i++){
+            for(int j=0; j<N; j++){
+                if(k<N*N){
+                Mat[i][j]=check[k];
+                k++;
+                }
+            }
+        }
+        return Mat;
+    }
+};
