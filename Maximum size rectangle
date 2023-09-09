@@ -1,0 +1,48 @@
+int maxAreaInHistograph( int arr[] , int n  )
+    {
+        stack<int>stk;
+        
+        int res=0;
+        for(int i=0 ; i<n ; i++)
+        {
+            while(stk.empty()==false && arr[i]<=arr[stk.top()])
+            {
+                int top=stk.top();
+                stk.pop();
+                
+                int curr=arr[top]*(stk.empty()?i:i-stk.top()-1);
+                res=max(res,curr);
+            }
+            stk.push(i);
+        }
+        
+        while(stk.empty()==false)
+        {
+            int top=stk.top();
+            stk.pop();
+            
+            int curr=arr[top]*(stk.empty()?n:n-stk.top()-1);
+            res=max(res,curr);
+        }
+        
+        return res;
+    }
+    int maxArea(int M[MAX][MAX], int n, int m) {
+        
+        int res=maxAreaInHistograph(M[0],m);
+        
+        for(int i=1 ; i<n ; i++)
+        {
+            for(int j=0 ; j<m ; j++)
+            {
+                if(M[i][j]==1)
+                {
+                    M[i][j]+=M[i-1][j];
+                }
+            }
+            
+            int currres=maxAreaInHistograph(M[i],m);
+            res=max(res,currres);
+        }
+        return res;
+    }
