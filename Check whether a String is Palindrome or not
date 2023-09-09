@@ -1,0 +1,16 @@
+
+ 
+int isPalindrome(string S)
+    {
+        int begin = 0; 
+        int end = S.length()-1;
+        while(begin < end){
+            if(S[begin]!=S[end])
+                return false;
+            begin++;
+            end--;
+        }
+        return true;
+        
+    }
+
