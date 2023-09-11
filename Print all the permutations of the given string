@@ -1,0 +1,12 @@
+vector<string>find_permutation(string S)
+    {
+        sort(S.begin(), S.end());
+        vector<string> vec;
+        do
+        {
+            vec.push_back(S);
+        }
+        //'next_permutation' f^n generates the next Lexicographically Greater Permutation of the String 'S'.
+        while(next_permutation(S.begin(), S.end()));
+        return vec;
+    }
