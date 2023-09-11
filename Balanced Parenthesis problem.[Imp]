@@ -1,0 +1,41 @@
+class Solution
+{
+    public:
+    
+    bool ispar(string x)
+    {
+        long long n=x.size();
+        if(n%2!=0){
+            return false;
+        }
+        stack<char>st;
+        for(int i=0;i<n; i++){
+            if(st.empty() || x[i]=='(' || x[i]=='{' || x[i]=='['){
+                st.push(x[i]);
+            }
+            
+            else{
+                if(x[i]==')' && st.top()=='('){
+                    st.pop();
+                }
+                else if(x[i]=='}' && st.top()=='{'){
+                    st.pop();
+                }
+                else if(x[i]==']' && st.top()=='['){
+                    st.pop();
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        
+        if(!st.empty()){
+            return false;
+        }
+        
+        return true;
+        
+    }
+
+};
