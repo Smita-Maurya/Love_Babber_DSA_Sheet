@@ -1,0 +1,30 @@
+class Solution{
+    public:
+  
+     int mod=1e9+7;
+    long long int helper(int i, int j ,string &s , vector<vector<long long int>>&dp){
+        if(i==j){
+            return 1;
+        }
+        if(i>j){
+            return 0;
+        }
+        if(dp[i][j]!=-1){
+            return dp[i][j];
+        }
+        if(s[i]==s[j]){
+            return dp[i][j]= (1+(helper(i+1 ,j , s , dp)%mod + helper(i , j-1 , s , dp)%mod)%mod);
+        }
+        else{
+            return dp[i][j]=(helper(i+1 , j , s , dp)%mod +(helper(i , j-1 , s , dp)%mod - helper(i+1 , j-1 , s , dp)%mod+mod)%mod)%mod;
+        }
+    }
+    long long int  countPS(string str)
+    {
+         
+         int n=str.size();
+         vector<vector<long long int>>dp(n , vector<long long int>(n , -1));
+         
+    }
+     
+};
