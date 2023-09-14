@@ -1,0 +1,28 @@
+class Solution
+{
+    public:
+  
+    string smallestWindow (string S, string P)
+    {
+        vector<int> fp(26, 0);
+        for (char c : P) fp[c - 'a']++;
+        int left = 0, right = 0;
+        int ml = INT_MAX, ms = 0;
+        int r = P.length();
+        
+        while (right < S.length()) {
+            if (--fp[S[right++] - 'a'] >= 0) r--;
+    
+            while (r == 0) {
+                if (right - left < ml) {
+                    ml = right - left;
+                    ms = left;
+                }
+    
+                if (++fp[S[left++] - 'a'] > 0) r++;
+            }
+        }
+    
+        return (ml == INT_MAX) ? "-1" : S.substr(ms, ml);
+         }
+};
