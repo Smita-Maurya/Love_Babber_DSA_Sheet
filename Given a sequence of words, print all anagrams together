@@ -1,0 +1,38 @@
+class Solution{
+  public:
+  
+  bool check(string s1 , string s2){
+      sort(s1.begin() , s1.end());
+      sort(s2.begin() , s2.end());
+      if(s1==s2){
+          return true;
+      }
+      return false;
+  }
+    vector<vector<string> > Anagrams(vector<string>& str) {
+         
+        int n=str.size();
+        vector<vector<string>>ans;
+        vector<string>v;
+        for(int i= 0; i<n ; i++){
+            
+            if(str[i]!="1"){
+                string s=str[i];
+                v.push_back(str[i]);
+                str[i]="1";
+                    
+            for(int j=i+1 ; j<n ; j++){
+                 if(check(s , str[j])==1 && str[j]!="1"){
+                     v.push_back(str[j]);
+                     str[j]="1";
+                 }
+                
+                }
+                ans.push_back(v);
+                v.erase(v.begin() , v.end());
+            }
+            
+        }
+        return ans;
+    }
+};
