@@ -1,0 +1,49 @@
+class Solution
+{
+    public:
+    Node* reverse(Node*head){
+        if(head==NULL){
+            return NULL;
+        }
+        Node*prev=NULL;
+        Node* curr=head;
+        Node* next;
+        while(curr!=NULL){
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+        
+        return prev;
+    }
+    Node* addOne(Node *head) 
+    {
+        if(head==NULL){
+            return NULL;
+        }
+         int carry=1;
+         head= reverse(head);
+         Node*temp=head;
+         Node*prev=NULL;
+         while(temp!=NULL){
+             int sum=temp->data+carry;
+             int mod= sum%10;
+             temp->data= mod;
+             carry= sum/10;
+             
+             prev=temp;
+             temp=temp->next;
+         }
+         
+         if(carry!=0){
+             Node*newnode= new Node(carry);
+             prev->next= newnode;
+         }
+         Node*res= reverse(head);
+         return res;
+          
+         
+        
+    }
+};
