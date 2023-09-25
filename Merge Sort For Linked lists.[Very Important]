@@ -1,0 +1,75 @@
+class Solution{
+  public:
+  Node*merge(Node*left , Node*right){
+      if(left==NULL && right==NULL){
+          return NULL;
+      }
+      if(left==NULL && right!=NULL){
+          return right;
+      }
+       if(left!=NULL && right==NULL){
+          return left;
+      }
+      Node*dummy= new Node(-1);
+      Node*temp3=dummy;
+      Node*temp1=left;
+      Node*temp2=right;
+      while(temp1!=NULL && temp2!=NULL){
+          if(temp1->data <temp2->data){
+              temp3->next=temp1;
+              temp3=temp1;
+              temp1=temp1->next;
+              
+          }
+           else {
+              temp3->next=temp2;
+              temp3=temp2;
+              temp2=temp2->next;
+              
+          }
+      }
+      while(temp1!=NULL){
+          temp3->next=temp1;
+          temp3=temp1;
+              temp1=temp1->next;
+              
+      }
+      while(temp2!=NULL){
+          temp3->next=temp2;
+          temp3=temp2;
+          temp2=temp2->next;
+           
+      }
+      dummy=dummy->next;
+      return dummy;
+      
+  }
+  Node*findmid(Node*head){
+      if(head==NULL){
+          return NULL;
+      }
+      Node*slow=head;
+      Node*fast= head->next;
+      while(fast!=NULL && fast->next!=NULL){
+          slow=slow->next;
+          fast=fast->next->next;
+      }
+      return slow;
+  }
+    //Function to sort the given linked list using Merge Sort.
+    Node* mergeSort(Node* head) {
+        if(head==NULL || head->next==NULL){
+            return head;
+        }
+        Node*left=head;
+        Node*mid=findmid(head);
+        Node*right=mid->next;
+        mid->next=NULL;
+        left= mergeSort(left);
+        right= mergeSort(right);
+        
+        Node*res= merge(left , right);
+        return res;
+        
+    }
+};
