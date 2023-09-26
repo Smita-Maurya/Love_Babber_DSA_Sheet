@@ -1,0 +1,54 @@
+void splitList(Node *head, Node **head1, Node **head2)
+{
+    Node* ptr = head,*temp=NULL ;
+    int count=0 ;
+    
+    while(ptr && ptr->next != head) 
+    {
+        count++ ;
+        ptr = ptr->next ;
+    }
+    count++ ;
+    if(count==1)
+    {
+        *head1 = head ;
+        *head2 = head ;
+        return ;
+    }
+    
+    ptr = head ;
+    int k=0 ;
+    while(ptr)
+    {
+        k++ ;
+        if(k==count/2)
+            break ;
+        ptr = ptr->next ;
+    }
+    if(count%2==0)  
+    {
+        temp = ptr->next ;
+        ptr->next = head ;
+        *head1 = head ;
+        
+        *head2 = temp ; 
+        while(temp->next !=head)
+            temp = temp->next ;
+            
+        temp->next = *head2 ;
+    }
+    else     
+    {
+        ptr = ptr->next ;
+        temp = ptr->next ;
+        ptr->next = head ;
+        *head1 = head ;
+        
+        *head2 = temp ; 
+        while(temp->next !=head)
+            temp = temp->next ;
+            
+        temp->next = *head2 ;
+    }
+    return ;
+}
