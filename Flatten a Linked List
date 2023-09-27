@@ -1,0 +1,43 @@
+Node * mergeNode(Node*left,Node* right)
+{
+    Node *ptr = new Node(0) ;
+    Node *head = ptr ;
+    while(left && right)
+    {
+        if(left->data<right->data)
+        {
+            ptr->bottom = new Node(left->data) ;
+            left = left->bottom ;
+        }
+        else
+        {
+            ptr->bottom = new Node(right->data) ;
+            right = right->bottom ;
+        }
+        ptr = ptr->bottom ;
+    }
+    while(left)
+    {
+        ptr->bottom = new Node(left->data) ;
+        left = left->bottom ;
+        ptr = ptr->bottom ;
+    }
+    while(right)
+    {
+        ptr->bottom = new Node(right->data) ;
+        right = right->bottom ;
+        ptr = ptr->bottom ;
+    }
+    ptr->bottom = NULL ;
+    return head->bottom ;
+}
+Node *flatten(Node *root)
+{
+    // base case
+    if(root->next == NULL)
+        return root;
+        
+    root->next = flatten(root->next);
+    root = mergeNode(root,root->next);
+    return root;
+}
