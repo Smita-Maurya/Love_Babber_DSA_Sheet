@@ -1,0 +1,38 @@
+class Solution{
+public:
+Node* reverse(Node*head){
+    if(head==NULL || head->next==NULL){
+        return head;
+    }
+    Node*prev=NULL;
+    Node*curr= head;
+    Node*next;
+    while(curr!=NULL){
+        next=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr= next;
+    }
+    return prev;
+}
+    int getNthFromLast(Node *head, int n)
+    {
+        if(head==NULL){
+            return -1;
+        }
+        int count=0;
+         
+        Node*head2=reverse(head);
+        Node*temp2=head2;
+        
+        while(n>1 && temp2!=NULL){
+            temp2=temp2->next;
+            n--;
+        }
+        if(temp2!=NULL){
+            return temp2->data;
+        }
+        return -1;
+           
+    }
+};
