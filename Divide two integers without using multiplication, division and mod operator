@@ -1,0 +1,25 @@
+class Solution
+{
+    public:
+    long long divide(long long dividend, long long divisor) 
+    {
+        int si= ((dividend <0)^ (divisor<0))? 0:1;
+        
+        long long div= abs(dividend);
+        long long dis= abs(divisor);
+        int q=0;
+        for(int i=31 ; i>=0 ; i--){
+            if(div >=(dis<<i)){
+                div= div-(dis<<i);
+                q= q|(1<<i);
+            }
+        }
+        if(si){
+            return q;
+        }
+        else{
+            return -q;
+        }
+        
+    }
+};
