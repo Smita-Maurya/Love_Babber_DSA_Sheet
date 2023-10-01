@@ -1,0 +1,26 @@
+class Solution{
+	public:
+	void solve(string s,int index, vector<string>&ans, string res){
+            if(index>=s.length()){
+                if(res.length()>0){
+                    ans.push_back(res);
+                }
+                return;
+            }
+            res.push_back(s[index]);
+            solve(s,index+1,ans,res);
+            res.pop_back();
+            solve(s,index+1,ans,res);
+        }
+		vector<string> AllPossibleStrings(string s){
+		     
+		    int n=s.size();
+		    
+		    vector<string>v;
+		    string res="";
+		    solve(s ,0 ,v , res);
+		    sort(v.begin() , v.end());
+		    return v;
+		  
+		}
+};
