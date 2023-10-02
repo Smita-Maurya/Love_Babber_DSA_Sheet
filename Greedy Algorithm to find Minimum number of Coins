@@ -1,0 +1,45 @@
+class Solution{
+public:
+    string chooseandswap(string a){
+        
+        int n=a.size();
+       int str[26];
+       for(int i=0; i<26 ; i++){
+           str[i]=-1;
+       }
+       
+        for(int i=0; i<n ; i++){
+             if(str[a[i]-'a']==-1){
+                 str[a[i]-'a']=i;
+             }
+        }
+        int i,j;
+        for( i=0; i<n ; i++){
+             bool chk=false;
+            for( j=0; j<a[i]-'a' ; j++){
+                if(str[j] >str[a[i]-'a']){
+                    chk=true;
+                    break;
+                }
+            }
+            if(chk){
+                break;
+            }
+        }
+        if(i<n-1){
+            char c1= a[i];
+            char c2= char(j+'a');
+            
+            for( i=0; i<n ; i++){
+                if(a[i]==c1){
+                    a[i]=c2;
+                }
+                else if(a[i]==c2){
+                    a[i]=c1;
+                }
+            }
+        }
+        return a;
+    }
+    
+};
