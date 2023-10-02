@@ -1,0 +1,36 @@
+class Solution
+{
+public:
+int minc(int candies[], int N, int K){
+    int mincost=0;
+        
+        for(int i=0; i<N ; i++){
+            mincost+=candies[i];
+            N=N-K;
+        }
+        return mincost;
+}
+int maxc(int candies[], int N, int K){
+    int maxcost=0;
+        int ind=0;
+        for(int i=N-1 ; i>=ind ; i--){
+            maxcost+=candies[i];
+            ind=ind+K;
+        }
+        return maxcost;
+}
+    vector<int> candyStore(int candies[], int N, int K)
+    {
+        sort(candies , candies+N);
+        
+        vector<int>v;
+        
+        int mc=minc(candies , N , K);
+        v.push_back(mc);
+         
+        int mac= maxc(candies , N , K);
+        
+        v.push_back(mac);
+        return v;
+    }
+};
