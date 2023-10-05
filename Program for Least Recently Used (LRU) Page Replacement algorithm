@@ -1,0 +1,29 @@
+class Solution{
+public:
+ 
+    int pageFaults(int N, int C, int pages[]){
+         
+        int count=0;
+        
+         unordered_map<int , int>map;
+         int left=0;
+         int right=0;
+         while(left<N){
+             if(map.find(pages[left])==map.end()){
+                 count++;
+             }
+             map[pages[left]]++;
+             
+             while(map.size()>C){
+                 map[pages[right]]--;
+                 if(map[pages[right]]==0){
+                     map.erase(pages[right]);
+                 }
+                 right++;
+             }
+             left++;
+         }
+        
+        return count;
+    }
+};
