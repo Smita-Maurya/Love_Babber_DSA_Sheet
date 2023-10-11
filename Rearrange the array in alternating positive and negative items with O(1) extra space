@@ -1,0 +1,27 @@
+void rearrange(long long *arr, int n) 
+    { 
+    	 
+    	
+    	 int left = 0; int right = n-1;
+    	 vector<long long> temp;
+    	 bool flag = true;
+    	 
+    	 for(int i = 0; i < n; i++)
+    	 {
+    	     if(flag)
+    	     {
+    	         temp.push_back(arr[right--]);
+    	     }
+    	     else 
+    	     {
+    	         temp.push_back(arr[left++]);
+    	     }
+    	     flag = !flag;
+    	 }
+    	 
+    	 int tempLength = temp.size();
+    	 for(int i = 0; i < tempLength; i++)
+    	 {
+    	     arr[i] = temp[i];
+    	 }
+    }
