@@ -1,0 +1,39 @@
+class Solution{
+public:
+int helper(int n , int i ,int j,  vector<vector<int>>& Matrix , vector<vector<int>>&dp){
+    if(i<0 || i>=n || j<0|| j>=n){
+        return -1e9;
+    }
+    if(dp[i][j]!=-1){
+        return dp[i][j];
+    }
+    if(i==0){
+        return Matrix[0][j];
+    }
+    
+    int a,b,c;
+    a=b=c=0;
+    a= Matrix[i][j]+helper(n,i-1 , j , Matrix , dp);
+    b=Matrix[i][j]+helper(n , i-1 , j+1 , Matrix , dp);
+    c=Matrix[i][j]+helper(n , i-1 , j-1 , Matrix , dp);
+    
+    return dp[i][j] = max({a , b, c});
+}
+    int maximumPath(int N, vector<vector<int>> Matrix)
+    {
+        if(N==0){
+            return 0;
+        }
+         vector<vector<int>>dp(N , vector<int>(N , -1));
+        
+        int maxi=0;
+        for(int i=0;i<N ; i++){
+            int ans= helper(N , N-1 , i , Matrix , dp);
+            maxi=max(maxi , ans);
+        }
+        
+        
+        return maxi;
+        
+    }
+};
