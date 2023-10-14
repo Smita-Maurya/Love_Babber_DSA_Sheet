@@ -1,0 +1,40 @@
+class Solution{
+public:	
+	int maxSubstring(string S)
+	{
+	    int n=S.size();
+	    int left=0;
+	    int right=0;
+	    int diff=0;
+	    int one=0;
+	    int zero=0;
+	    int mxdiff=-1;
+	    while(left<n){
+	        if(S[left]=='1'){
+	            one++;
+	        }
+	        else if(S[left]=='0'){
+	            zero++;
+	        }
+	        diff= zero-one;
+	        while(diff<0){
+	            if(S[right]=='1'){
+	                one--;
+	            }
+	            else if(S[right]=='0'){
+	                zero--;
+	            }
+	            diff= zero-one;
+	            right++;
+
+	        }
+	        mxdiff= max(diff , mxdiff);
+	        left++;
+	    }
+	    if(mxdiff==0){
+	        return -1;
+	    }
+	    return mxdiff;
+	    
+	}
+};
