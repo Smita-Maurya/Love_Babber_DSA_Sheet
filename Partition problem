@@ -1,0 +1,33 @@
+class Solution{
+public:
+int helper(int n , int arr[] ,int i , int sum , vector<vector<int>>&dp){
+    if(sum==0){
+        return 1;
+    }
+    if(i==0 && sum!=0){
+        return 0;
+    }
+    if(dp[i][sum]!=-1){
+        return dp[i][sum];
+    }
+    
+    if(arr[i-1]>sum){
+       return  helper(n , arr , i-1 , sum , dp);
+    }
+    return dp[i][sum]= helper(n , arr , i-1 , sum-arr[i-1] , dp)|| helper(n , arr , i-1 , sum , dp);
+}
+    int equalPartition(int N, int arr[])
+    {
+        int sum=0;
+        for(int i=0; i<N  ; i++){
+            sum+=arr[i];
+        }
+        if(sum%2!=0){
+            return 0;
+        }
+       
+        vector<vector<int>>dp(N+1 , vector<int>(sum+1 , -1));
+        return helper(N , arr , N , sum/2 , dp);
+         
+    }
+};
