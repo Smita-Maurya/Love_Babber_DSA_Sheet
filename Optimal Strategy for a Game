@@ -1,0 +1,24 @@
+ 
+class Solution{
+    public:
+    int helper(int arr[] , int n ,vector<vector<int>>&dp , int st, int en){
+        if(st>=en){
+            return 0;
+        }
+        if(dp[st][en]!=-1){
+            return dp[st][en];
+        }
+        int op1= arr[st]+min(helper(arr ,n , dp , st+2 , en), helper(arr , n , dp , st+1 , en-1));
+        int op2= arr[en]+min(helper(arr, n , dp , st , en-2 ),helper(arr , n , dp , st+1 , en-1));
+        return dp[st][en]=max(op1 , op2);
+    }
+    long long maximumAmount(int arr[], int n){
+        
+         int sum=0;
+         vector<vector<int>>dp(n , vector<int>(n , -1));
+         return helper(arr , n , dp , 0 , n-1);
+         
+         
+        return sum;
+    }
+};
