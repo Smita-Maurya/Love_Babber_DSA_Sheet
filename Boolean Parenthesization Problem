@@ -1,0 +1,62 @@
+class Solution{
+public:
+    int mod = 1003;
+    // i j isTrue --> value
+    unordered_map<string, int>mp;
+    int cnt = 1;
+    int solve(string s, int i, int j, bool isTrue){
+        if(i>j)return 0;
+        
+        if(i==j){
+            if(isTrue == true){
+                return s[i] == 'T' ? 1 : 0;
+            }else{
+                return s[i] == 'F' ? 1 : 0;
+            }
+        }
+        
+        string temp = to_string(i) +" "+ to_string(j) + " " + to_string(isTrue);
+        
+        if(mp.find(temp) != mp.end()){
+            return mp[temp];
+        }
+        
+        int ans = 0;
+        
+        for(int k=i+1; k<=j-1; k=k+2){
+            
+            int leftT = solve(s, i, k-1, true);
+            int leftF = solve(s, i, k-1, false);
+            int rightT = solve(s, k+1, j, true);
+            int rightF = solve(s, k+1, j, false);
+            
+            if(s[k] == '&'){
+                if(isTrue == true){
+                    ans += ((leftT % mod) * (rightT % mod)) % mod;
+                }else{
+                    ans += ((leftT % mod) * (rightF % mod))% mod + ((leftF % mod) * (rightT % mod))% mod + ((leftF % mod) * (rightF % mod))% mod;
+                }
+            }else if(s[k] == '|'){
+                if(isTrue == true){
+                    ans += ((leftT % mod) * (rightF % mod))% mod + ((leftF % mod) * (rightT % mod))% mod + ((leftT % mod) * (rightT % mod))% mod;
+                }else{
+                    ans += ((leftF % mod) * (rightF % mod))% mod;
+                }
+            }else if(s[k] == '^'){
+                if(isTrue == true){
+                    ans += ((leftT % mod) * (rightF% mod))% mod + ((leftF % mod) * (rightT % mod))% mod;
+                }else{
+                    ans += ((leftT % mod) * (rightT % mod)) % mod + ((leftF % mod) * (rightF % mod)) % mod;
+                }
+            }
+            
+        }
+        return mp[temp] = (ans % mod);
+    }
+    
+    int countWays(int N, string S){
+        bool isTrue = true;
+        
+        return solve(S, 0, N-1, isTrue);
+    }
+};
