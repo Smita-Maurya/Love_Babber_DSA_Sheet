@@ -1,0 +1,31 @@
+ class Solution
+{
+    public:
+    //Function to check if two strings are isomorphic.
+    bool areIsomorphic(string str1, string str2)
+    {
+        int n1=str1.size();
+        int n2=str2.size();
+        if(n1!=n2){
+            return false;
+        }
+        
+        int v1[256]={0};
+        int v2[256]={0};
+        
+        for(int i=0; i<n1 ; i++){
+            v1[str1[i]]= v1[str1[i]]+i+1;
+            v2[str2[i]]= v2[str2[i]]+i+1;
+        }
+        
+        for(int i=0; i<n1 ; i++){
+            if(v1[str1[i]]!=v2[str2[i]]){
+                return false;
+            }
+        }
+        
+        return true;
+     
+        
+    }
+};
